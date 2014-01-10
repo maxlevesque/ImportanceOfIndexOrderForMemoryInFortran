@@ -1,0 +1,4 @@
+gfortran main.f90
+./a.out > results_gfortran_nooptimization
+gfortran -O3 main.f90
+./a.out > results_gfortran_O3
