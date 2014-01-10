@@ -18,8 +18,7 @@ end do
 
 call cpu_time(t1)
 
-print*,"i,j,k => a(i,j,k) :",t1-t0
-
+print*,"i,j,k => a(i,j,k) :",t1-t0," sec => ",int(1*1000)
 
 do i=1,n
     do j=1,n
@@ -31,40 +30,40 @@ end do
 
 call cpu_time(t2)
 
-print*,"i,j,k => a(k,j,i) :",t2-t1
+print*,"i,j,k => a(k,j,i) :",t2-t1," sec => ",int((t2-t1)/(t1-t0)*1000)
 
 a=s
 
 call cpu_time(t3)
 
-print*,"implicit :",t3-t2
+print*,"implicit :",t3-t2," sec => ",int((t3-t2)/(t1-t0)*1000)
 
 do concurrent( i=1:n, j=1:n, k=1:n )
     a(i,j,k)=s
 end do
 
 call cpu_time(t4)
-print*,"concurrent i,j,k => a(i,j,k) :",t4-t3
+print*,"concurrent i,j,k => a(i,j,k) :",t4-t3," sec => ",int((t4-t3)/(t1-t0)*1000)
 
 do concurrent( i=1:n, j=1:n, k=1:n)
     a(k,j,i)=s
 end do
 
 call cpu_time(t5)
-print*,"concurrent i,j,k => a(k,j,i) :",t5-t4
+print*,"concurrent i,j,k => a(k,j,i) :",t5-t4," sec => ",int((t5-t4)/(t1-t0)*1000)
 
 forall( i=1:n, j=1:n, k=1:n )
     a(i,j,k)=s
 end forall
 
 call cpu_time(t6)
-print*,"forall i,j,k => a(i,j,k) :",t6-t5
+print*,"forall i,j,k => a(i,j,k) :",t6-t5," sec => ",int((t6-t5)/(t1-t0)*1000)
 
 forall( i=1:n, j=1:n, k=1:n )
     a(k,j,i)=s
 end forall
 
 call cpu_time(t7)
-print*,"forall i,j,k => a(k,j,i) :",t7-t6
+print*,"forall i,j,k => a(k,j,i) :",t7-t6," sec => ",int((t7-t6)/(t1-t0)*1000)
 
 end program main
