@@ -7,24 +7,27 @@ Just run the script. It will compile and produce results in terminal
 Results are given in sec and a score is attributed. The less the better.
 
 gfortran main.f90
- do i; do j; do k; a(i,j,k)=s; needs   5.45915604     seconds. Reference score:        1000
- do i; do j; do k; a(k,j,i)=s :  0.795019150     seconds. Score:         145
- implicit a(:,:,:)=s :  0.349738121     seconds. Score:          64
- implicit a=s :  0.353263855     seconds. Score:          64
- do concurrent i,j,k ; a(i,j,k)=s :  0.478909016     seconds. Score:          87
- do concurrent i,j,k ; a(k,j,i)=s :   5.88027435E-39 seconds. Score:         611
- forall i,j,k ; a(i,j,k)=s :  0.396711349     seconds. Score:          72
- forall i,j,k ; a(k,j,i)=s :   3.33094215     seconds. Score:         610
+ do i; do j; do k; a(i,j,k)=s; needs   5.46710110     seconds. Reference score:        1000
+ do i; do j; do k; a(k,j,i)=s :  0.782495022     seconds. Speedup =   6.98675489    
+ implicit a(:,:,:)=s :  0.339677811     seconds. Speedup =   16.0949612    
+ implicit a=s :  0.340271950     seconds. Speedup =   16.0668583    
+ do concurrent i,j,k ; a(i,j,k)=s :  0.473570824     seconds. Speedup =   11.5444212    
+ do concurrent i,j,k ; a(k,j,i)=s :   5.88027435E-39 seconds. Speedup =   1.64268994    
+ forall i,j,k ; a(i,j,k)=s :  0.401863098     seconds. Speedup =   13.6043873    
+ forall i,j,k ; a(k,j,i)=s :   3.32125282     seconds. Speedup =   1.64609599    
 
 gfortran -O3 main.f90
- do i; do j; do k; a(i,j,k)=s; needs   3.53109002     seconds. Reference score:        1000
- do i; do j; do k; a(k,j,i)=s :  0.337677956     seconds. Score:          95
- implicit a(:,:,:)=s :  0.352410793     seconds. Score:          99
- implicit a=s :  0.341470242     seconds. Score:          96
- do concurrent i,j,k ; a(i,j,k)=s :  0.347651958     seconds. Score:          98
- do concurrent i,j,k ; a(k,j,i)=s :   0.00000000     seconds. Score:         943
- forall i,j,k ; a(i,j,k)=s :  0.337882042     seconds. Score:          95
- forall i,j,k ; a(k,j,i)=s :   3.33127975     seconds. Score:         943
+ do i; do j; do k; a(i,j,k)=s; needs   3.53243709     seconds. Reference score:        1000
+ do i; do j; do k; a(k,j,i)=s :  0.338969946     seconds. Speedup =   10.4210920    
+ implicit a(:,:,:)=s :  0.338504791     seconds. Speedup =   10.4354124    
+ implicit a=s :  0.347027302     seconds. Speedup =   10.1791334    
+ do concurrent i,j,k ; a(i,j,k)=s :  0.339870930     seconds. Speedup =   10.3934660    
+ do concurrent i,j,k ; a(k,j,i)=s :   0.00000000     seconds. Speedup =   1.06270540    
+ forall i,j,k ; a(i,j,k)=s :  0.342233658     seconds. Speedup =   10.3217115    
+ forall i,j,k ; a(k,j,i)=s :   3.33900261     seconds. Speedup =   1.05793178    
 ```
 
-Conclusion: Where possible, use `do concurrent(i,j,k); a(i,j,k)`
+Conclusions
+----------
+- Loop order is of prime importance.
+- Where possible, use `do concurrent(i,j,k); a(i,j,k)`. You'll reach a speedup of 10, in this case.
