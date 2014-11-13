@@ -1,7 +1,9 @@
-echo "Results are given in sec and a score that is 1000 for the reference test and 0 for infinitely faster than the reference"
+echo "Results are given in sec and a score is attributed. The less the better."
+echo ""
 echo "gfortran main.f90"
 gfortran main.f90
 ./a.out
+echo ""
 echo "gfortran -O3 main.f90"
 gfortran -O3 main.f90
 ./a.out
