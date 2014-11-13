@@ -19,7 +19,7 @@ program main
   it = it+1
   call cpu_time( t(it) )
   dtref = t(it)-t(it-1)
-  print*,"do i; do j; do k; a(i,j,k)=s; needs",t(it)-t(it-1),"seconds. Reference score:",int((t(it)-t(it-1))/dtref*1000)
+  print*,"do i; do j; do k; a(i,j,k)=s; needs",t(it)-t(it-1),"seconds. Speedup =",dtref/(t(it)-t(it-1))
 
   do i=1,n
       do j=1,n
