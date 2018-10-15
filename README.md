@@ -2,7 +2,7 @@ Where I compare the time due to various orders of loops index in Fortran
 
 Just run the script. It will compile and produce results in terminal
 
-### Example output:
+### Example OUTPUT:
 ```bash
 Results are given in sec and a score is attributed. The less the better.
 
@@ -31,4 +31,4 @@ gfortran -O3 main.f90
 Conclusions
 ----------
 - Loop order is of prime importance.
-- Where possible, use `do concurrent(i,j,k); a(i,j,k)`. You'll reach a speedup of 10, in this case.
+- Where possible, use implicit tables or `do concurrent(i,j,k); a(i,j,k)`. You'll reach a speedup of 10, in this case.
